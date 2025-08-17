@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @RestController
@@ -38,7 +39,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Result<LoginVo> login(@RequestBody LoginParam loginParam) {
+    public Result<LoginVo> login(@RequestBody LoginParam loginParam, HttpServletRequest request) {
         // 从数据库查询用户
         User user = userService.findByUsername(loginParam.getUsername())
                 .orElse(null);
@@ -49,14 +50,36 @@ public class AuthController {
             throw new BusinessException(401, "用户名或密码错误");
         }
 
-        // 生成token
-        String token = tokenService.login(loginParam.getUsername());
+        // 获取客户端信息
+        String ipAddress = getClientIpAddress(request);
+        String userAgent = request.getHeader("User-Agent");
 
-        // 计算过期时间（假设token有效期为24小时）
-        long expiresAt = System.currentTimeMillis() + 24 * 60 * 60 * 1000;
+        // 生成token
+        String token = tokenService.login(loginParam.getUsername(), ipAddress, userAgent);
+
+        // 计算过期时间（从token服务获取剩余时间）
+        Long remainingTime = tokenService.getTokenRemainingTime(token);
+        long expiresAt = System.currentTimeMillis() + (remainingTime * 1000);
 
         LoginVo loginVo = new LoginVo(token, loginParam.getUsername(), expiresAt);
         return Result.success("登录成功", loginVo);
+    }
+    
+    /**
+     * 获取客户端真实IP地址
+     */
+    private String getClientIpAddress(HttpServletRequest request) {
+        String xForwardedFor = request.getHeader("X-Forwarded-For");
+        if (xForwardedFor != null && !xForwardedFor.isEmpty() && !"unknown".equalsIgnoreCase(xForwardedFor)) {
+            return xForwardedFor.split(",")[0].trim();
+        }
+        
+        String xRealIp = request.getHeader("X-Real-IP");
+        if (xRealIp != null && !xRealIp.isEmpty() && !"unknown".equalsIgnoreCase(xRealIp)) {
+            return xRealIp;
+        }
+        
+        return request.getRemoteAddr();
     }
 
     @PostMapping("/logout")

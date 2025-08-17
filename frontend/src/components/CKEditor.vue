@@ -200,7 +200,7 @@ class CustomUploadAdapter {
             if (response.data && response.data.url) {
               let imageUrl = response.data.url
               
-              console.log('图片上传成功，URL:', imageUrl)
+              // 图片上传成功
               
               resolve({
                 default: imageUrl

@@ -135,4 +135,22 @@ public class MinioService implements ApplicationRunner {
             return null;
         }
     }
+
+    /**
+     * 获取文件字节数组
+     */
+    public byte[] getFileBytes(String fileName) {
+        try {
+            GetObjectResponse response = minioClient.getObject(
+                    GetObjectArgs.builder()
+                            .bucket(minioConfig.getBucketName())
+                            .object(fileName)
+                            .build()
+            );
+            return response.readAllBytes();
+        } catch (Exception e) {
+            log.error("Failed to get file bytes: {}", e.getMessage(), e);
+            return null;
+        }
+    }
 }

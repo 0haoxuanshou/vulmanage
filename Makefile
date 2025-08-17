@@ -5,7 +5,7 @@ FRONTEND_IMAGE = registry.cn-shanghai.aliyuncs.com/bountyteam/vul_fe:1.0
 BACKEND_IMAGE = registry.cn-shanghai.aliyuncs.com/bountyteam/vul_be:1.0
 
 # 默认目标
-.PHONY: all build-frontend build-backend build push-frontend push-backend push clean up
+.PHONY: all build-frontend build-backend build push-frontend push-backend push clean up local-up down
 
 all: build
 
@@ -49,7 +49,17 @@ up:
 	@echo "up local containers..."
 	cd docker && docker-compose up -d
 	@echo "local containers up successfully"
-	
+
+local-up:
+	@echo "up local containers with local ports..."
+	cd docker && docker-compose -f docker-compose.yml -f docker-compose-local-ports.yml up -d
+	@echo "local containers up successfully with local ports"
+
+down:
+	@echo "down local containers..."
+	cd docker && docker-compose down
+	@echo "local containers down successfully"
+
 # 帮助信息
 help:
 	@echo "Available targets:"
@@ -62,3 +72,5 @@ help:
 	@echo "  clean          - Remove local images"
 	@echo "  help           - Show this help message"
 	@echo "  up             - Up local containers"
+	@echo "  local-up       - Up local containers with local ports"
+	@echo "  down           - Down local containers"

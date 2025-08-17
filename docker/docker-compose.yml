@@ -9,8 +9,6 @@ services:
       POSTGRES_USER: ${DB_USERNAME}          # 数据库用户名
       POSTGRES_PASSWORD: ${DB_PASSWORD}  # 数据库密码
       POSTGRES_DB: ${DB_NAME}        # 默认数据库
-    ports:
-      - "5432:5432"                   # 映射端口
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -24,9 +22,6 @@ services:
       MINIO_ROOT_USER: ${MINIO_ACCESS_KEY}        # MinIO 管理账号
       MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY}    # MinIO 管理密码
     command: server /data --console-address ":9001"
-    ports:
-      - "9000:9000"  # S3 API
-      - "9001:9001"  # Web 管理界面
     volumes:
       - minio_data:/data
     networks:
@@ -48,8 +43,6 @@ services:
       VULN_PREFIX: ${VULN_PREFIX}
       LOG_LEVEL: ${LOG_LEVEL}
       SECURITY_LOG_LEVEL: WARN
-    ports:
-      - "8080:8080"
     depends_on:
       - postgres
       - minio

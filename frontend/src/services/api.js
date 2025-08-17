@@ -108,6 +108,13 @@ export const vulnerabilityService = {
   },
   getHistory(id) {
     return api.get(`/vulnerabilities/${id}/history`)
+  },
+
+  // 新的统一导出接口
+  generateUnifiedReport(params) {
+    return api.post('/vulnerabilities/report', params, {
+      responseType: 'blob'
+    })
   }
 }
 
@@ -123,12 +130,45 @@ export const fileService = {
   }
 }
 
+export const vulnerabilityTemplateService = {
+  getAll(params) {
+    return api.get('/vulnerability-templates', { params })
+  },
+  getAllAvailable() {
+    return api.get('/vulnerability-templates/all')
+  },
+  getById(id) {
+    return api.get(`/vulnerability-templates/${id}`)
+  },
+  create(template) {
+    return api.post('/vulnerability-templates', template)
+  },
+  update(id, template) {
+    return api.put(`/vulnerability-templates/${id}`, template)
+  },
+  delete(id) {
+    return api.delete(`/vulnerability-templates/${id}`)
+  },
+  setDefault(id) {
+    return api.put(`/vulnerability-templates/${id}/default`)
+  },
+  getDefault() {
+    return api.get('/vulnerability-templates/default')
+  }
+}
+
 export const setupService = {
   async getSetupStatus() {
     return api.get('/setup/status')
   },
   async createAdmin(adminData) {
     return api.post('/setup/admin', adminData)
+  }
+}
+
+export const systemService = {
+  getSystemInfo() {
+    return api.get('/system/info')
   }
 }
 

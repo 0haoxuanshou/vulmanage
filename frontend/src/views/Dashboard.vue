@@ -35,6 +35,10 @@
               <el-icon><document /></el-icon>
               <span>漏洞管理</span>
             </el-menu-item>
+            <el-menu-item index="/dashboard/templates">
+              <el-icon><files /></el-icon>
+              <span>模板管理</span>
+            </el-menu-item>
           </el-menu>
         </el-aside>
         
@@ -50,7 +54,7 @@
 import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
-import { ArrowDown, Document, Odometer } from '@element-plus/icons-vue'
+import { ArrowDown, Document, Odometer, Files } from '@element-plus/icons-vue'
 import { authService } from '@/services/api'
 
 export default {
@@ -58,7 +62,8 @@ export default {
   components: {
     ArrowDown,
     Document,
-    Odometer
+    Odometer,
+    Files
   },
   setup() {
     const router = useRouter()

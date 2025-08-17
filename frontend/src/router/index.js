@@ -50,6 +50,11 @@ const routes = [
         path: 'vulnerabilities/:id/edit',
         name: 'VulnerabilityEdit',
         component: () => import('../views/vulnerability/Edit.vue')
+      },
+      {
+        path: 'templates',
+        name: 'VulnerabilityTemplateList',
+        component: () => import('../views/VulnerabilityTemplateList.vue')
       }
     ]
   }
