@@ -78,7 +78,7 @@
 
 ### 一键部署
 
-[部署演示视频](https://b23.tv/SBJv7Mp)
+<a href="https://b23.tv/SBJv7Mp" target="_blank">部署演示视频</a>
 
 1. **克隆项目**
 ```bash
