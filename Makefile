@@ -15,29 +15,14 @@ build: build-frontend build-backend
 # 构建前端镜像
 build-frontend:
 	@echo "Building frontend image..."
-	cd frontend && npm run build && docker build -t $(FRONTEND_IMAGE) .
+	cd frontend && npm run build && docker buildx build --platform linux/amd64,linux/arm64 -t $(FRONTEND_IMAGE) . --push
 	@echo "Frontend image built successfully: $(FRONTEND_IMAGE)"
 
 # 构建后端镜像
 build-backend:
 	@echo "Building backend image..."
-	mvn clean package -DskipTests && docker build -t $(BACKEND_IMAGE) .
+	mvn clean package -DskipTests && docker buildx build --platform linux/amd64,linux/arm64 -t $(BACKEND_IMAGE) . --push
 	@echo "Backend image built successfully: $(BACKEND_IMAGE)"
-
-# 推送所有镜像
-push: push-frontend push-backend
-
-# 推送前端镜像
-push-frontend:
-	@echo "Pushing frontend image..."
-	docker push $(FRONTEND_IMAGE)
-	@echo "Frontend image pushed successfully"
-
-# 推送后端镜像
-push-backend:
-	@echo "Pushing backend image..."
-	docker push $(BACKEND_IMAGE)
-	@echo "Backend image pushed successfully"
 
 # 清理本地镜像
 clean:
@@ -66,9 +51,6 @@ help:
 	@echo "  build          - Build both frontend and backend images"
 	@echo "  build-frontend - Build frontend image only"
 	@echo "  build-backend  - Build backend image only"
-	@echo "  push           - Push both images to registry"
-	@echo "  push-frontend  - Push frontend image to registry"
-	@echo "  push-backend   - Push backend image to registry"
 	@echo "  clean          - Remove local images"
 	@echo "  help           - Show this help message"
 	@echo "  up             - Up local containers"
