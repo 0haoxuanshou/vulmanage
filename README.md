@@ -6,6 +6,13 @@
 [![Vue.js](https://img.shields.io/badge/Vue.js-3.2.13-brightgreen.svg)](https://vuejs.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-blue.svg)](https://www.postgresql.org/)
 
+[![star](https://img.shields.io/github/stars/0haoxuanshou/vulmanage)](https://github.com/0haoxuanshou/vulmanage)
+[![fork](https://img.shields.io/github/forks/0haoxuanshou/vulmanage)](https://github.com/0haoxuanshou/vulmanage)
+[![contributors](https://img.shields.io/github/contributors/0haoxuanshou/vulmanage)](https://github.com/0haoxuanshou/vulmanage)
+[![issues](https://img.shields.io/github/issues/0haoxuanshou/vulmanage)](https://github.com/0haoxuanshou/vulmanage)
+[![pull requests](https://img.shields.io/github/issues-pr/0haoxuanshou/vulmanage)](https://github.com/0haoxuanshou/vulmanage)
+
+
 一个功能完善的安全漏洞管理平台，帮助安全团队有效地跟踪、管理和分析安全漏洞。
 
 ## ✨ 功能特性
@@ -252,3 +259,5 @@ docker build -t vulmanage-frontend .
 ---
 
 ⭐ 如果这个项目对您有帮助，请给我们一个星标！
+
+[![Star History Chart](https://api.star-history.com/svg?repos=0haoxuanshou/vulmanage&type=Date)](https://star-history.com/#0haoxuanshou/vulmanage)
