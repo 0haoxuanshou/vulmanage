@@ -85,6 +85,8 @@ cp docker/.env.example docker/.env
 
 3. **启动服务**
 ```bash
+make up 
+# 或者
 cd docker
 docker-compose up -d
 ```
