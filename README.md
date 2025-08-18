@@ -78,6 +78,8 @@
 
 ### 一键部署
 
+[部署演示视频](https://b23.tv/SBJv7Mp)
+
 1. **克隆项目**
 ```bash
 git clone https://github.com/0haoxuanshou/vulmanage.git
