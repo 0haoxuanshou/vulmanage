@@ -54,7 +54,57 @@ const routes = [
       {
         path: 'templates',
         name: 'VulnerabilityTemplateList',
-        component: () => import('../views/VulnerabilityTemplateList.vue')
+        component: () => import('../views/template/List.vue')
+      },
+      {
+        path: 'projects',
+        name: 'ProjectManagement',
+        component: () => import('../views/project/ProjectManagement.vue')
+      },
+      {
+        path: 'projects/:id',
+        name: 'ProjectDetail',
+        component: () => import('../views/project/Detail.vue')
+      },
+      {
+        path: 'tasks',
+        name: 'TaskList',
+        component: () => import('../views/task/List.vue')
+      },
+      {
+        path: 'tasks/add',
+        name: 'TaskAdd',
+        component: () => import('../views/task/Edit.vue')
+      },
+      {
+        path: 'tasks/:id',
+        name: 'TaskDetail',
+        component: () => import('../views/task/Detail.vue')
+      },
+      {
+        path: 'tasks/:id/edit',
+        name: 'TaskEdit',
+        component: () => import('../views/task/Edit.vue')
+      },
+      {
+        path: 'assets',
+        name: 'AssetList',
+        component: () => import('../views/asset/List.vue')
+      },
+      {
+        path: 'assets/add',
+        name: 'AssetAdd',
+        component: () => import('../views/asset/Edit.vue')
+      },
+      {
+        path: 'assets/:id',
+        name: 'AssetDetail',
+        component: () => import('../views/asset/Detail.vue')
+      },
+      {
+        path: 'assets/:id/edit',
+        name: 'AssetEdit',
+        component: () => import('../views/asset/Edit.vue')
       }
     ]
   }

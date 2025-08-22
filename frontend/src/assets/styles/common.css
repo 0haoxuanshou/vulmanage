@@ -1,48 +1,219 @@
+/* 全局变量定义 */
+:root {
+  --primary-color: #409EFF;
+  --success-color: #67C23A;
+  --warning-color: #E6A23C;
+  --danger-color: #F56C6C;
+  --info-color: #909399;
+  --text-primary: #303133;
+  --text-regular: #606266;
+  --text-secondary: #909399;
+  --text-placeholder: #C0C4CC;
+  --border-color: #DCDFE6;
+  --border-light: #E4E7ED;
+  --background-color: #F5F7FA;
+  --component-size-large: 40px;
+  --component-size-default: 32px;
+  --component-size-small: 24px;
+  --border-radius: 4px;
+  --box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+}
+
 /* 通用页面样式 */
+.page-container {
+  padding: var(--spacing-lg);
+  background-color: var(--background-color);
+  min-height: 100vh;
+}
+
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
+.page-header h1,
 .page-header h2 {
   margin: 0;
   font-size: 24px;
   font-weight: 600;
-  color: #303133;
+  color: var(--text-primary);
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .card-header h2 {
   margin: 0;
-  color: #303133;
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 500;
 }
 
 /* 搜索栏样式 */
-.search-bar {
-  margin-bottom: 20px;
+.search-bar,
+.search-card {
+  margin-bottom: var(--spacing-lg);
+}
+
+.search-form {
+  padding: var(--spacing-md);
+}
+
+.search-form .el-form-item {
+  margin-bottom: var(--spacing-md);
 }
 
 /* 操作按钮组样式 */
 .header-actions {
   display: flex;
-  gap: 10px;
+  gap: var(--spacing-sm);
 }
 
 .action-buttons {
   display: flex;
-  gap: 8px;
+  gap: var(--spacing-xs);
+}
+
+/* 表格容器样式 */
+.table-container {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
 }
 
 /* 分页容器样式 */
 .pagination-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+/* 统一组件大小 */
+.el-button {
+  height: var(--component-size-default);
+  padding: 0 var(--spacing-md);
+}
+
+.el-button--large {
+  height: var(--component-size-large);
+  padding: 0 var(--spacing-lg);
+}
+
+.el-button--small {
+  height: var(--component-size-small);
+  padding: 0 var(--spacing-sm);
+}
+
+.el-input {
+  height: var(--component-size-default);
+}
+
+.el-input--large {
+  height: var(--component-size-large);
+}
+
+.el-input--small {
+  height: var(--component-size-small);
+}
+
+.el-select {
+  width: 200px;
+}
+
+.el-select .el-input {
+  height: var(--component-size-default);
+}
+
+.el-date-picker {
+  width: 240px;
+}
+
+/* 卡片样式 */
+.el-card {
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-light);
+}
+
+/* 表格样式 */
+.el-table {
+  border-radius: var(--border-radius);
+}
+
+.el-table th {
+  background-color: #FAFAFA;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* 对话框样式 */
+.el-dialog {
+  border-radius: var(--border-radius);
+}
+
+.el-dialog__header {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.el-dialog__body {
+  padding: var(--spacing-lg);
+}
+
+.el-dialog__footer {
+  padding: var(--spacing-lg);
+  border-top: 1px solid var(--border-light);
+}
+
+/* 表单样式 */
+.el-form-item {
+  margin-bottom: var(--spacing-lg);
+}
+
+.el-form-item__label {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .header-actions {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .search-form {
+    flex-direction: column;
+  }
+  
+  .el-select,
+  .el-date-picker {
+    width: 100%;
+  }
 }

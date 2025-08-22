@@ -1,8 +1,8 @@
 # Makefile for VulManage Project
 
 # 变量定义
-FRONTEND_IMAGE = registry.cn-shanghai.aliyuncs.com/bountyteam/vul_fe:1.0
-BACKEND_IMAGE = registry.cn-shanghai.aliyuncs.com/bountyteam/vul_be:1.0
+FRONTEND_IMAGE = registry.cn-shanghai.aliyuncs.com/bountyteam/vul_fe:1.1
+BACKEND_IMAGE = registry.cn-shanghai.aliyuncs.com/bountyteam/vul_be:1.1
 
 # 默认目标
 .PHONY: all build-frontend build-backend build push-frontend push-backend push clean up local-up down
@@ -32,12 +32,12 @@ clean:
 
 up: 
 	@echo "up local containers..."
-	cd docker && docker-compose up -d
+	cd docker && docker-compose pull && docker-compose up -d
 	@echo "local containers up successfully"
 
 local-up:
 	@echo "up local containers with local ports..."
-	cd docker && docker-compose -f docker-compose.yml -f docker-compose-local-ports.yml up -d
+	cd docker && docker-compose pull && docker-compose -f docker-compose.yml -f docker-compose-local-ports.yml up -d
 	@echo "local containers up successfully with local ports"
 
 down:

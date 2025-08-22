@@ -39,6 +39,18 @@
               <el-icon><files /></el-icon>
               <span>模板管理</span>
             </el-menu-item>
+            <el-menu-item index="/dashboard/projects">
+              <el-icon><folder /></el-icon>
+              <span>项目管理</span>
+            </el-menu-item>
+            <el-menu-item index="/dashboard/tasks">
+              <el-icon><list /></el-icon>
+              <span>任务管理</span>
+            </el-menu-item>
+            <el-menu-item index="/dashboard/assets">
+              <el-icon><monitor /></el-icon>
+              <span>资产管理</span>
+            </el-menu-item>
           </el-menu>
         </el-aside>
         
@@ -54,7 +66,7 @@
 import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { ElMessageBox } from 'element-plus'
-import { ArrowDown, Document, Odometer, Files } from '@element-plus/icons-vue'
+import { ArrowDown, Document, Odometer, Files, Folder, List, Monitor } from '@element-plus/icons-vue'
 import { authService } from '@/services/api'
 
 export default {
@@ -63,7 +75,10 @@ export default {
     ArrowDown,
     Document,
     Odometer,
-    Files
+    Files,
+    Folder,
+    List,
+    Monitor
   },
   setup() {
     const router = useRouter()

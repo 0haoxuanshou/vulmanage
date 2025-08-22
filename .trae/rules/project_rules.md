@@ -1,0 +1,12 @@
+1.当前项目使用的框架版本为springboot3.5
+2.当前项目使用的orm框架为mybatis-plus ,编写业务代码的时候尽量直接使用mybatis-plus的方法，风格使用lambda风格，避免使用xml配置，分页涉及多个表的查询通过自定义sql实现，实体类在org.demon.vulmanage.model，mapper类在org.demon.vulmanage.mapper
+3.当前项目的数据库为postgres，数据库升级框架为flyway，数据库升级脚本放在src/main/resources/db/migration目录下
+4.使用lombok简化代码
+5.当前项目使用的安全框架为springsecurity，使用jwt进行认证
+6.接口都写在org.demon.vulmanage.controller目录下，入参写在org.demon.vulmanage.param包中，出参写在org.demon.vulmanage.vo包中
+7.当前项目前端使用的框架为vue3，使用element-plus作为组件库，前端页面的样式必须使用统一风格，组件的大小必须统一
+8.前端所有接口都统一管理在api.js文件中，所有业务页面都应用这个js实现接口调用
+9.前端页面的样式必须统一，css样式都存在frontend/src/assets/styles目录中
+10.前端每个模块的vue文件都维护在对应的一个目录中，如漏洞模块维护在frontend/src/views/vulnerability中，项目模块维护在frontend/src/views/project中
+11.每次都需要对编辑的代码进行格式化
+12.如果要记录当前操作用户或者当前用户id，必须使用SecurityUtil中获取

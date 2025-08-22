@@ -166,9 +166,93 @@ export const setupService = {
   }
 }
 
+export const projectService = {
+  getAll(params) {
+    return api.get('/projects', { params })
+  },
+  getById(id) {
+    return api.get(`/projects/${id}`)
+  },
+  create(project) {
+    return api.post('/projects', project)
+  },
+  update(id, project) {
+    return api.put(`/projects/${id}`, project)
+  },
+  delete(id) {
+    return api.delete(`/projects/${id}`)
+  },
+  getAllProjects() {
+    return api.get('/projects/all')
+  },
+  getProjectsByUserId(userId) {
+    return api.get(`/projects/user/${userId}`)
+  }
+}
+
 export const systemService = {
   getSystemInfo() {
     return api.get('/system/info')
+  }
+}
+
+export const taskService = {
+  getAll(params) {
+    return api.get('/tasks', { params })
+  },
+  getById(id) {
+    return api.get(`/tasks/${id}`)
+  },
+  create(task) {
+    return api.post('/tasks', task)
+  },
+  update(id, task) {
+    return api.put(`/tasks/${id}`, task)
+  },
+  delete(id) {
+    return api.delete(`/tasks/${id}`)
+  },
+  getAllTasks() {
+    return api.get('/tasks/all')
+  },
+  getTasksByProjectId(projectId) {
+    return api.get(`/tasks/project/${projectId}`)
+  },
+  getTasksByUserId(userId) {
+    return api.get(`/tasks/user/${userId}`)
+  },
+  updateStatus(id, status) {
+    return api.put(`/tasks/${id}/status`, null, { params: { status } })
+  }
+}
+
+export const assetService = {
+  getAll(params) {
+    return api.get('/assets', { params })
+  },
+  getById(id) {
+    return api.get(`/assets/${id}`)
+  },
+  create(asset) {
+    return api.post('/assets', asset)
+  },
+  update(id, asset) {
+    return api.put(`/assets/${id}`, asset)
+  },
+  delete(id) {
+    return api.delete(`/assets/${id}`)
+  },
+  getAllAssets() {
+    return api.get('/assets/all')
+  },
+  getAssetsByProjectId(projectId) {
+    return api.get(`/assets/project/${projectId}`)
+  },
+  getAssetsByUserId(userId) {
+    return api.get(`/assets/user/${userId}`)
+  },
+  updateStatus(id, status) {
+    return api.put(`/assets/${id}/status`, null, { params: { status } })
   }
 }
 

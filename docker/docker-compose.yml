@@ -28,7 +28,7 @@ services:
       - vulmanage-network
 
   backend:
-    image: registry.cn-shanghai.aliyuncs.com/bountyteam/vul_be:1.0
+    image: registry.cn-shanghai.aliyuncs.com/bountyteam/vul_be:${VERSION}
     container_name: vulmanage_backend
     restart: always
     environment:
@@ -50,7 +50,7 @@ services:
       - vulmanage-network
 
   frontend:
-    image: registry.cn-shanghai.aliyuncs.com/bountyteam/vul_fe:1.0
+    image: registry.cn-shanghai.aliyuncs.com/bountyteam/vul_fe:${VERSION}
     container_name: vulmanage_frontend
     restart: always
     ports:

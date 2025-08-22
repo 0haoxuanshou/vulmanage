@@ -15,6 +15,11 @@
 
 一个功能完善的安全漏洞管理平台，帮助安全团队有效地跟踪、管理和分析安全漏洞。
 
+## 📚 文档导航
+
+- [📋 更新日志 (CHANGELOG)](./CHANGELOG.md) - 查看系统版本更新记录和功能变更
+- [🗓️ 开发计划 (DEVELOPMENT PLAN)](./DEVELOPMENT_PLAN.md) - 了解近期研发规划和功能路线图
+
 ## 页面介绍
 
 #### dashboard
@@ -101,9 +106,12 @@ cd vulmanage
 ```bash
 cp docker/.env.example docker/.env
 # 编辑 docker/.env 文件，修改相关配置（推荐账号密码都改成强密码）
+vim docker/.env
+# 将版本号修改为最新版本
+VERSION=1.1
 ```
 
-3. **启动服务**
+3. **启动（更新）服务**
 ```bash
 make up 
 # 或者

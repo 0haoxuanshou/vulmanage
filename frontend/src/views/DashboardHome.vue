@@ -4,7 +4,64 @@
       <h2>系统概览</h2>
     </div>
     
-
+    <!-- 数据统计区域 -->
+    <el-row :gutter="20" class="stats-row">
+      <el-col :span="6">
+        <el-card class="stats-card vulnerability-stats">
+          <div class="stats-content">
+            <div class="stats-icon">
+              <el-icon><document /></el-icon>
+            </div>
+            <div class="stats-info">
+              <div class="stats-number">{{ statsData.vulnerabilityCount }}</div>
+              <div class="stats-label">漏洞数量</div>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+      
+      <el-col :span="6">
+        <el-card class="stats-card project-stats">
+          <div class="stats-content">
+            <div class="stats-icon">
+              <el-icon><folder /></el-icon>
+            </div>
+            <div class="stats-info">
+              <div class="stats-number">{{ statsData.projectCount }}</div>
+              <div class="stats-label">项目数量</div>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+      
+      <el-col :span="6">
+        <el-card class="stats-card task-stats">
+          <div class="stats-content">
+            <div class="stats-icon">
+              <el-icon><list /></el-icon>
+            </div>
+            <div class="stats-info">
+              <div class="stats-number">{{ statsData.taskCount }}</div>
+              <div class="stats-label">任务数量</div>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+      
+      <el-col :span="6">
+        <el-card class="stats-card asset-stats">
+          <div class="stats-content">
+            <div class="stats-icon">
+              <el-icon><monitor /></el-icon>
+            </div>
+            <div class="stats-info">
+              <div class="stats-number">{{ statsData.assetCount }}</div>
+              <div class="stats-label">资产数量</div>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
     
     <!-- 系统信息展示区域 -->
     <el-row :gutter="20" class="system-info-row">
@@ -130,8 +187,8 @@
 <script>
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
-import { Refresh, Cpu, MemoryCard, HardDrive, Connection } from '@element-plus/icons-vue'
-import { systemService } from '@/services/api'
+import { Refresh, Cpu, MemoryCard, HardDrive, Connection, Document, Folder, List, Monitor } from '@element-plus/icons-vue'
+import { systemService, vulnerabilityService, projectService, taskService, assetService } from '@/services/api'
 
 export default {
   name: 'DashboardHome',
@@ -140,14 +197,47 @@ export default {
     Cpu,
     MemoryCard,
     HardDrive,
-    Connection
+    Connection,
+    Document,
+    Folder,
+    List,
+    Monitor
   },
   setup() {
     const systemInfoLoading = ref(false)
+    const statsLoading = ref(false)
     
     const systemInfo = ref({})
+    const statsData = ref({
+      vulnerabilityCount: 0,
+      projectCount: 0,
+      taskCount: 0,
+      assetCount: 0
+    })
     
-
+    const fetchStats = async () => {
+      statsLoading.value = true
+      try {
+        const [vulnerabilities, projects, tasks, assets] = await Promise.all([
+          vulnerabilityService.getAll({ page: 1, size: 1 }),
+          projectService.getAll({ page: 1, size: 1 }),
+          taskService.getAll({ page: 1, size: 1 }),
+          assetService.getAll({ page: 1, size: 1 })
+        ])
+        
+        statsData.value = {
+          vulnerabilityCount: vulnerabilities.data?.total || 0,
+          projectCount: projects.data?.total || 0,
+          taskCount: tasks.data?.total || 0,
+          assetCount: assets.data?.total || 0
+        }
+      } catch (error) {
+        console.error('获取统计数据失败:', error)
+        ElMessage.error('获取统计数据失败')
+      } finally {
+        statsLoading.value = false
+      }
+    }
     
     const fetchSystemInfo = async () => {
       systemInfoLoading.value = true
@@ -168,11 +258,14 @@ export default {
     
     onMounted(() => {
       fetchSystemInfo()
+      fetchStats()
     })
     
     return {
       systemInfoLoading,
+      statsLoading,
       systemInfo,
+      statsData,
       refreshSystemInfo
     }
   }
@@ -185,6 +278,74 @@ export default {
 }
 
 /* 页面特定样式 */
+
+/* 统计卡片样式 */
+.stats-row {
+  margin-bottom: 20px;
+}
+
+.stats-card {
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stats-content {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.stats-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  font-size: 24px;
+  color: white;
+}
+
+.vulnerability-stats .stats-icon {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.project-stats .stats-icon {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.task-stats .stats-icon {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.asset-stats .stats-icon {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.stats-info {
+  flex: 1;
+}
+
+.stats-number {
+  font-size: 28px;
+  font-weight: bold;
+  color: #303133;
+  margin-bottom: 4px;
+}
+
+.stats-label {
+  font-size: 14px;
+  color: #909399;
+  font-weight: 500;
+}
 
 /* 系统信息样式 */
 .system-info-row {

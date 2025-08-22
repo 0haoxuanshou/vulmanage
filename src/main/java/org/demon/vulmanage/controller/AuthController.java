@@ -8,8 +8,7 @@ import org.demon.vulmanage.param.auth.LoginParam;
 import org.demon.vulmanage.service.TokenService;
 import org.demon.vulmanage.service.UserService;
 import org.demon.vulmanage.vo.auth.LoginVo;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.demon.vulmanage.util.SecurityUtil;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,12 +26,11 @@ public class AuthController {
 
     @GetMapping("/status")
     public Result<Map<String, Object>> getAuthStatus() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.isAuthenticated() &&
-                !"anonymousUser".equals(authentication.getPrincipal())) {
+        if (SecurityUtil.isAuthenticated()) {
+            String username = SecurityUtil.getCurrentUsername();
             return Result.success(Map.of(
                     "authenticated", true,
-                    "username", authentication.getName()
+                    "username", username != null ? username : ""
             ));
         }
         return Result.success(Map.of("authenticated", false));
