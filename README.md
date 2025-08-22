@@ -22,14 +22,25 @@
 
 ## 页面介绍
 
-#### dashboard
+#### Dashboard 仪表板
 ![dashboard](./doc/img/dashboard页面.png)
 
-#### 漏洞列表
+#### 漏洞管理
 ![漏洞列表](./doc/img/漏洞管理页面.png)
 
 #### 模板管理
 ![模板管理](./doc/img/模板管理页面.png)
+
+#### 项目管理
+![项目管理](./doc/img/project.png)
+
+#### 任务管理
+![任务管理](./doc/img/task.png)
+
+#### 资产管理
+![资产管理](./doc/img/asset.png)
+
+
 
 ## ✨ 功能特性
 
